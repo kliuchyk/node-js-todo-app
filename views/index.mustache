@@ -16,7 +16,11 @@
 
   <ul>
     {{#todos}}
-      <li>{{ description }} - {{ done }}</li>
+    <li>
+      <form action="/todos/{{_id}}/completed" method="POST">
+        {{ description }} - {{ done }} <button type="submit">Done</button>
+      </form>
+    </li>
     {{/todos}}
   </ul>
 </body>

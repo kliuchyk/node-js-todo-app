@@ -21,4 +21,17 @@ router.post('/todos', (req, res) => {
     });
 });
 
+router.post('/todos/:id/completed', (req, res) => {
+  let todoId = req.params.id;
+
+  Todo.findById(todoId)
+    .exec()
+    .then(todo => {
+      todo.done = !todo.done;
+      return todo.save();
+    })
+    .then(todo => res.redirect('/'));
+
+});
+
 module.exports = router;
