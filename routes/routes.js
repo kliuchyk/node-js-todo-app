@@ -14,6 +14,10 @@ router.post('/todos', (req, res) => {
     .save()
     .then(todo => {
       res.redirect('/');
+    })
+    .catch(error => {
+      console.log(error);
+      res.redirect('/');
     });
 });
 
