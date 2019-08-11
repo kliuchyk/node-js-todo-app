@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mustacheExpress = require('mustache-express');
 const mongoose = require('mongoose');
+const routes = require('./routes/routes');
 
 const app = express();
 
@@ -15,9 +16,7 @@ app.engine('mustache', mustacheExpressInstance);
 app.set('view engine', 'mustache');
 app.set('views', __dirname + '/views');
 
-app.get('/', (req, res) => {
-  res.render('index', {});
-});
+app.use('/', routes)
 
 app.listen(3000, () => {
   console.log('Worked fine');
