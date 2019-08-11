@@ -2,11 +2,19 @@ const router = require('express').Router();
 const Todo = require('../models/todo');
 
 router.get('/', (req, res) => {
-  res.render('index', {});
+  Todo.find({}).then(todos => {
+    res.render('index', { todos: todos });
+  });
 });
 
 router.post('/todos', (req, res) => {
-  res.json(req.body);
+  let newTodo = new Todo({ description: req.body.description });
+
+  newTodo
+    .save()
+    .then(todo => {
+      res.redirect('/');
+    });
 });
 
 module.exports = router;
